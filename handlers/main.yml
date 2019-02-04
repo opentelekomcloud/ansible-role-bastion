@@ -1,0 +1,4 @@
+---
+# handlers file for ansible-role-otc-bastion
+- name: restart sshd
+  systemd: name=sshd state=restarted

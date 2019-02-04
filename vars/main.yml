@@ -1,0 +1,13 @@
+---
+# vars file for ansible-role-otc-bastion
+# Prefix name for all created resources
+prefix: test- # This should be overridden in inventory
+
+# Domain name for the bastion server to be created in (becomes part of the FQDN)
+domain_name: example.com # This also should be overridden in inventory
+
+# Name of the network to place server into. If `otc_vpc` role is used: (prefix + 'otc-net')
+server_net: "{{ (prefix + 'otc-net') }}" # should be on pair with default value from otc_vpc
+
+# Optional python version for Ansible to use on the bastion for Ansible connection (take effect in runtime inventory)
+bastion_python: "/usr/bin/env python3"
