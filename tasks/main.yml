@@ -8,24 +8,22 @@
       loop_var: task
     with_items: "{{ task_manager }}"
 
-  - name: message
-    tasks:
-      - name: print notice
-        debug:
-          msg: |
-            Configure your SSH to have bastion {{ groups.bastions[0] }}
-            ({{ hostvars[groups.bastions[0]]['ansible_host'] }}) be used as
-            a proxy to other subnets. Add to the ~/.ssh/config:
+  - name: print notice
+    debug:
+      msg: |
+        Configure your SSH to have bastion {{ groups.bastions[0] }}
+        ({{ hostvars[groups.bastions[0]]['ansible_host'] }}) be used as
+        a proxy to other subnets. Add to the ~/.ssh/config:
 
-            ```
-              Host {{ groups.bastions[0] }}
-              HostName {{ hostvars[groups.bastions[0]]['ansible_host'] }}
-              User {{ hostvars[groups.bastions[0]]['ansible_user'] }}
-              IdentityFile {{ hostvars[groups.bastions[0]]['ansible_ssh_private_key_file'] }}
-              ControlMaster auto
-              ControlPersist 5m
-            ```
-        when: hostvars[groups.bastions[0]]['ansible_host'] is defined
+        ```
+          Host {{ groups.bastions[0] }}
+          HostName {{ hostvars[groups.bastions[0]]['ansible_host'] }}
+          User {{ hostvars[groups.bastions[0]]['ansible_user'] }}
+          IdentityFile {{ hostvars[groups.bastions[0]]['ansible_ssh_private_key_file'] }}
+          ControlMaster auto
+          ControlPersist 5m
+        ```
+    when: hostvars[groups.bastions[0]]['ansible_host'] is defined
 
 # Remove
 - when: state == 'absent'
