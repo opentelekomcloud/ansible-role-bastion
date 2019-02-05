@@ -4,28 +4,28 @@ galaxy_info:
   description: Manage bastion server in the VPC to provide access to servers without public IPs
   company: OpenTelekomCloud
 
-license: license (Apache)
+  license: license (Apache)
 
-min_ansible_version: 2.5
+  min_ansible_version: 2.5
 
-platforms:
- - name: EL
-   versions:
-    - all
- - name: Fedora
-   versions:
-    - all
- - name: Ubuntu
-   versions:
-    - all
- - name: Debian
-   versions:
-    - all
-galaxy_tags:
-  - system
-  - cloud
-  - openstack
-  - otc
-  - bastion
+  platforms:
+   - name: EL
+     versions:
+      - all
+   - name: Fedora
+     versions:
+      - all
+   - name: Ubuntu
+     versions:
+      - all
+   - name: Debian
+     versions:
+      - all
+  galaxy_tags:
+    - system
+    - cloud
+    - openstack
+    - otc
+    - bastion
 
-dependencies: []
+  dependencies: []
