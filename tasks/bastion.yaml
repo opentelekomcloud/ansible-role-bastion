@@ -1,6 +1,10 @@
 ---
 - when: state != 'absent'
   block:
+    - name: Check bastion
+      os_server_facts:
+        server: "{{ server_fqdn }}"
+
     - name: Create Server
       os_server:
         state: "{{ state }}"
@@ -17,6 +21,7 @@
         userdata: "{{ lookup('template', './user-data.j2') }}"
         meta: "group=bastion,groups={{ domain_name }},host-type=bastion,ansible_user={{ server_ssh_user }}"
       register: bastion_server
+      when: openstack_servers is not defined or (openstack_servers|length==0)
 
     # unfortunately it is not working to assign floating_ip, since server
     # is busy when trying to assign IP
@@ -28,7 +33,9 @@
     - name: get server info
       os_server_facts:
         server: "{{ server_fqdn }}"
-      when: assign_floating_ip
+      when:
+        - assign_floating_ip
+        - openstack_servers is not defined or (openstack_servers|length==0)
 
     - name: Convert nets list into dict for bastion address retrieval
       set_fact:
