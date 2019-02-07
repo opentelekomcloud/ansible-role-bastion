@@ -4,7 +4,7 @@ task_manager:
   - sec_group
   - bastion
 
-module_state: present
+state: present
 
 prefix: test- # This should be overridden in inventory
 domain_name: example.com # This also should be overridden in inventory
