@@ -1,9 +1,9 @@
 ---
-- when: module_state != 'absent'
+- when: state != 'absent'
   block:
     - name: Bastion SecGrp
       os_security_group:
-        state: "{{ module_state }}"
+        state: "{{ state }}"
         name: "{{ security_group }}"
         description: Security group for the bastion host
 
@@ -21,9 +21,9 @@
         port_range_max: 22
         remote_ip_prefix: 0.0.0.0/0
 
-- when: module_state == 'absent'
+- when: state == 'absent'
   block:
     - name: Delete Bastion SecGrp
       os_security_group:
-        state: "{{ module_state }}"
+        state: "{{ state }}"
         name: "{{ security_group }}"
