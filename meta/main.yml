@@ -1,5 +1,5 @@
 galaxy_info:
-  role_name: otc_bastion
+  role_name: bastion
   author: Artem Goncharov
   description: Manage bastion server in the VPC to provide access to servers without public IPs
   company: OpenTelekomCloud
