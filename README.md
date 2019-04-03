@@ -15,11 +15,11 @@ Available variables are listed below, along with default values (see `defaults/m
 
     prefix: test- # should be overriden
     domain_name: example.com # used to create server_fqdn and meta-data, should be overridden
-    
+    server_name: bastion
     server_subnet: "default-subnet" # should be on pair with default value from network_infra
     server_net: "{{ (prefix + 'otc-net') }}" # should be on pair with default value from network_infra
     security_group: "{{ (prefix + 'bastion_sg') }}"
-    server_fqdn: "{{ ('bastion.' + domain_name) }}"
+    server_fqdn: "{{ (server_name + '.' + domain_name) }}"
     server_image: "Standard_Fedora_29_latest"
     server_flavor: "s2.large.1"
     server_ssh_user: "linux"
