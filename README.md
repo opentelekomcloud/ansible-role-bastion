@@ -13,8 +13,8 @@ Role Variables
 
 Available variables are listed below, along with default values (see `defaults/main.yml`):
 
-    prefix: test- # This should be overridden in inventory
-    domain_name: example.com # This also should be overridden in inventory
+    prefix: test- # should be overriden
+    domain_name: example.com # used to create server_fqdn and meta-data, should be overridden
     
     server_subnet: "default-subnet" # should be on pair with default value from network_infra
     server_net: "{{ (prefix + 'otc-net') }}" # should be on pair with default value from network_infra
@@ -50,13 +50,25 @@ Including an example of how to use your role (for instance, with variables passe
 
     - hosts: localhost
       roles:
-         - otc_bastion
+         - opentelekomcloud.bastion
 
 Cleanup of the resources is as easy, as it's creation. For that a variable 'state': 'false' should be passed:
 
     - hosts: localhost
       roles:
-        - { role: otc_bastion, state: 'absent'}
+        - { role: opentelekomcloud.bastion, state: 'absent'}
+
+More advanced example:
+
+    - hosts: localhost
+      vars:
+        security_group: my_bastion_sg
+        server_net: my_network_name #openstack network list
+        server_keypair_name: my_existing_public_key
+        server_name: 'my_bastion_host'
+        domain_name: 'my-domain.com'
+      roles:
+        - { role: opentelekomcloud.bastion, state: 'present'}
 
 
 License
