@@ -18,7 +18,7 @@ Available variables are listed below, along with default values (see `defaults/m
     server_name: bastion
     server_subnet: "default-subnet" # should be on pair with default value from network_infra
     server_net: "{{ (prefix + 'otc-net') }}" # should be on pair with default value from network_infra
-    security_group: "{{ (prefix + 'bastion_sg') }}"
+    security_group: "{{ (prefix + 'bastion_sg') }}" # uses existing security group if the names are equal, otherwise a new sg will be created
     server_fqdn: "{{ (server_name + '.' + domain_name) }}"
     server_image: "Standard_Fedora_29_latest"
     server_flavor: "s2.large.1"
