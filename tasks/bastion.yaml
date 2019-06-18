@@ -27,27 +27,27 @@
     # there is no need to attach FIP this way starting from OpenStackSDK==0.30.0
     - os_floating_ip:
         server: "{{ server_fqdn }}"
-      when: assign_floating_ip
+      when: assign_floating_ip|bool
 
     - name: get server info
       os_server_facts:
         server: "{{ server_fqdn }}"
       when:
-        - assign_floating_ip
+        - assign_floating_ip|bool
         - openstack_servers is not defined or (openstack_servers|length==0)
 
     - name: Convert nets list into dict for bastion address retrieval
       set_fact:
         bastion_ips: "{{ bastion_ips|default({}) | combine( {item['OS-EXT-IPS:type']: item['addr']} ) }}"
       with_items: "{{ openstack_servers[0]['addresses'][server_net] }}"
-      when: assign_floating_ip
+      when: assign_floating_ip|bool
 
     # If not
     - name: Convert nets list into dict for bastion address retrieval
       set_fact:
         bastion_ips: "{{ bastion_ips|default({}) | combine( {item['OS-EXT-IPS:type']: item['addr']} ) }}"
       with_items: "{{ bastion_server['server']['addresses'][server_net] }}"
-      when: not assign_floating_ip
+      when: not assign_floating_ip|bool
 
     - name: Get the access address
       set_fact:
