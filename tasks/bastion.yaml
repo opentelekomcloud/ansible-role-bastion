@@ -9,6 +9,7 @@
       os_server:
         state: "{{ state }}"
         auto_ip: false
+        availability_zone: "{{ availability_zone | default(omit) }}"
         name: "{{ server_fqdn }}"
         image: "{{ server_image }}"
         flavor: "{{ server_flavor }}"
@@ -23,9 +24,7 @@
       register: bastion_server
       when: openstack_servers is not defined or (openstack_servers|length==0)
 
-    # unfortunately it is not working to assign floating_ip, since server
-    # is busy when trying to assign IP
-    # TODO(gtema) - analyse openstacksdk and potentially check server state
+    # there is no need to attach FIP this way starting from OpenStackSDK==0.30.0
     - os_floating_ip:
         server: "{{ server_fqdn }}"
       when: assign_floating_ip
