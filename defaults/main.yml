@@ -18,6 +18,7 @@ server_flavor: "s2.large.1"
 server_ssh_user: "linux"
 server_volume_size: 10
 assign_floating_ip: True
+fixed_floating_ip: ""
 # ssh_key_name: "{{ (infra_prefix + 'KeyPair')}}"
 server_keypair_name: "{{ (prefix + 'common-KeyPair') }}"
 

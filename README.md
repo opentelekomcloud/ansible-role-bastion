@@ -25,6 +25,7 @@ Available variables are listed below, along with default values (see `defaults/m
     server_ssh_user: "linux"
     server_volume_size: 10
     assign_floating_ip: True
+    fixed_floating_ip: ""
     # ssh_key_name: "{{ (infra_prefix + 'KeyPair')}}"
     server_keypair_name: "{{ (prefix + 'common-KeyPair') }}" # use existing key pair or create new keypair from file, consider ansible_ssh_private_key_file variable
     
