@@ -27,6 +27,7 @@
     # there is no need to attach FIP this way starting from OpenStackSDK==0.30.0
     - os_floating_ip:
         server: "{{ server_fqdn }}"
+        floating_ip_address: "{{ fixed_floating_ip | default(omit) }}"
       when: assign_floating_ip|bool
 
     - name: get server info
@@ -63,6 +64,7 @@
         port: 22
         host: "{{ bastion_interface_ip }}"
         timeout: 300
+      when: assign_floating_ip|bool
 
     - name: Add the bastion to the inventory
       add_host:
@@ -72,6 +74,7 @@
         ansible_ssh_private_key_file: "{{ ansible_ssh_private_key_file }}"
         ansible_python_interpreter: "{{ bastion_python | default(omit) }}"
         groups: bastions
+      when: assign_floating_ip|bool
 
 - when: state == 'absent'
   block:
@@ -79,4 +82,4 @@
       os_server:
         state: absent
         name: "{{ server_fqdn }}"
-        delete_fip: True
+        delete_fip: "{{ not fixed_floating_ip | default(True) }}"

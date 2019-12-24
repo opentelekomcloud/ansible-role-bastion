@@ -37,6 +37,9 @@ Available variables are listed below, along with default values (see `defaults/m
     # State (`present` for creation, `absent` for deletion)
     state: present
 
+Also you can specify availability zone by providing variable:
+
+    availability_zone: "eu-de-03" # omitted if not defined
 
 Dependencies
 ------------
